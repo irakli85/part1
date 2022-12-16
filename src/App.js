@@ -7,10 +7,10 @@ const part3 = 'State of a component:'
 const exercises3 = 14
 
 
- const Header = ({text}) => {
+ const Header = ({course}) => {
   return(
     <>
-      <h1>{text}</h1>
+      <h1>{course}</h1>
     </>
   )
  }
@@ -46,7 +46,7 @@ const App = () => {
  
   return (
     <>
-      <Header text={course}/>
+      <Header course={course}/>
       <Content/>
       <Total/>
     </>
