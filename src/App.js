@@ -42,7 +42,7 @@ const exercises3 = 14
  }
 
 
-function App() {  
+const App = () => {  
  
   return (
     <>
