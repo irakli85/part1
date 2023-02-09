@@ -2,28 +2,50 @@ import { useState } from "react";
 
 const Heading = ({text}) => <h1>{text}</h1>
 const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
-const Paragraph = ({text, count, text2}) => <p>{text} {count}{text2}</p>
+const StatisticLine = ({text, value, percentage}) => <p>{text} {value}{percentage}</p>
 
 const App = () => { 
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const [allFeedback, setAll] = useState(0)
 
   const handleClickGood = () => {
+    setAll(allFeedback + 1)
     setGood(good + 1)
   }
 
   const handleClickNeutral = () => {
+    setAll(allFeedback + 1)
     setNeutral(neutral + 1)
   }
 
   const handleClickBad = () => {
+    setAll(allFeedback + 1)
     setBad( bad + 1)
   }
 
   let all = good + neutral + bad
   let average = (good-bad) / all
-  let positive = (good/all)*100
+  let positive = (good/all) * 100
+
+  const Statistics = () => {
+    if(allFeedback === 0){
+      return(
+        <p>No feedback given</p>
+      )
+    }
+    return(
+      <div>        
+        <StatisticLine text='good' value = {good}/>
+        <StatisticLine text='neutral' value = {neutral}/>
+        <StatisticLine text='bad' value = {bad}/>
+        <StatisticLine text='all' value = {all}/>
+        <StatisticLine text='average' value = {isNaN(average) ? '0' : average}/>
+        <StatisticLine text='positive' value ={isNaN(positive) ? '0' : positive} percentage=' %'/>
+      </div>  
+    )
+  }
   
     return (
       <div>
@@ -32,12 +54,7 @@ const App = () => {
         <Button onClick={handleClickNeutral} text = 'neutral'/>
         <Button onClick={handleClickBad} text = 'bad'/>
         <Heading text= 'statistics'/>
-        <Paragraph text='good' count = {good}/>
-        <Paragraph text='neutral' count = {neutral}/>
-        <Paragraph text='bad' count = {bad}/>
-        <Paragraph text='all' count = {all}/>
-        <Paragraph text='average' count = {isNaN(average) ? '0' : average}/>
-        <Paragraph text='positive' count ={isNaN(positive) ? '0' : positive} text2=' %'/>             
+        <Statistics/>          
       </div>
     )
   }
