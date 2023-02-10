@@ -34,8 +34,8 @@ const App = () => {
 
   const handleVote = () => {
     setVote(vote + 1)
-    setAllVotes()
-    console.log(vote)
+    setAllVotes(allVotes.concat(vote))
+    console.log(allVotes)
   }
 
     return (
