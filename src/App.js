@@ -2,7 +2,16 @@ import { useState } from "react";
 
 const Heading = ({text}) => <h1>{text}</h1>
 const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
-const StatisticLine = ({text, value, percentage}) => <p>{text} {value}{percentage}</p>
+const StatisticLine = ({text, value, percentage}) =>{
+  return(
+    <tr>
+      <td>{text}</td>
+      <td>{value}{percentage}</td>
+    </tr>
+  )
+}
+
+
 
 const App = () => { 
   const [good, setGood] = useState(0)
@@ -26,8 +35,8 @@ const App = () => {
   }
 
   let all = good + neutral + bad
-  let average = (good-bad) / all
-  let positive = (good/all) * 100
+  let average = ((good-bad) / all).toFixed(1)
+  let positive = ((good/all) * 100).toFixed(1)
 
   const Statistics = () => {
     if(allFeedback === 0){
@@ -36,14 +45,14 @@ const App = () => {
       )
     }
     return(
-      <div>        
+      <table>        
         <StatisticLine text='good' value = {good}/>
         <StatisticLine text='neutral' value = {neutral}/>
         <StatisticLine text='bad' value = {bad}/>
         <StatisticLine text='all' value = {all}/>
         <StatisticLine text='average' value = {isNaN(average) ? '0' : average}/>
         <StatisticLine text='positive' value ={isNaN(positive) ? '0' : positive} percentage=' %'/>
-      </div>  
+      </table>  
     )
   }
   
